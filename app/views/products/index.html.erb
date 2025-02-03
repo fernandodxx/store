@@ -1,4 +1,4 @@
-<h1>Products</h1>
+<h1><%= t ".title" %></h1>
 <%= link_to "new", new_product_path if authenticated? %>
 <div id="products">
   <% @products.each do |product| %>
@@ -6,4 +6,4 @@
       <%= link_to product.name, product %>
     </div>
   <% end %>
-  </div>
+</div>
