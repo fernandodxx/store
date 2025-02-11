@@ -27,7 +27,7 @@ nav {
   gap: 1.2rem;
   max-width: 1100px;
   margin: 0 auto;
-  padding: 1rem;
+  
 }
 
 nav a {
@@ -69,24 +69,54 @@ section.product {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+.product-info {
+  flex: 1;
+}
+
 /* Imagens dos produtos */
-section.product img {
+.product-image img {
   border-radius: 10px;
-  flex-basis: 48%;
-  max-width: 48%;
+  max-width: 550px;
+  height: auto;
   object-fit: cover;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-section.product img:hover {
+.product-image img:hover {
   transform: scale(1.05);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Botão de compra */
+/* Formulário de Avaliação */
+form {
+  background: #FFF;
+  padding: 1rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 1rem;
+}
+
+form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #CCC;
+  border-radius: 5px;
+}
+
+form textarea {
+  resize: vertical;
+}
+
 .button {
   background-color: #C19A6B;
-  /* Bege sofisticado */
   color: #FFF;
   font-weight: bold;
   padding: 0.8rem 1.5rem;
@@ -98,7 +128,20 @@ section.product img:hover {
 
 .button:hover {
   background-color: #A67B5B;
-  /* Tom mais escuro no hover */
+}
+
+/* Lista de Avaliações */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  background: #FFF;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* Responsividade */
@@ -108,8 +151,86 @@ section.product img:hover {
     text-align: center;
   }
 
-  section.product img {
-    flex-basis: 100%;
+  .product-image img {
     max-width: 100%;
   }
+}
+
+#products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.product-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.product-name a {
+  color: #222;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.product-name a:hover {
+  color: #C19A6B;
+}
+
+.product-card {
+  background: #FFF;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.product-card h2 {
+  margin-bottom: 0.5rem;
+}
+
+.product-image {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.reviews {
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.reviews ul {
+  padding: 0;
+  list-style: none;
+}
+
+.reviews li {
+  background: #F9F9F9;
+  padding: 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.notice {
+  color: #A67B5B;
+  font-weight: bold;
+}
+
+.button {
+  display: inline-block;
+  background-color: #C19A6B;
+  color: #FFF;
+  padding: 0.7rem 1.2rem;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 6px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.button:hover {
+  background-color: #A67B5B;
 }

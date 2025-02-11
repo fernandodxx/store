@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   resources :products do
     resources :subscribers, only: [ :create ]
   end
+  resources :products do
+    resources :reviews, only: [ :create ]
+  end
+
   resource :unsubscribe, only: [ :show ]
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

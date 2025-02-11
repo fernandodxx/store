@@ -1,9 +1,34 @@
 <h1><%= t ".title" %></h1>
-<%= link_to "new", new_product_path if authenticated? %>
+
+<% if authenticated? %>
+  <%= link_to "Novo Produto", new_product_path, class: "button" %>
+<% end %>
+
 <div id="products">
   <% @products.each do |product| %>
-    <div>
-      <%= link_to product.name, product %>
+    <div class="product-card">
+      <div class="product-name">
+        <%= link_to product.name, product %>
+      </div>
+
+      <% if product.featured_image.attached? %>
+        <%= image_tag product.featured_image, class: "product-image" %>
+      <% end %>
+
+      <div class="reviews">
+        <% if product.reviews.any? %>
+          <h3>Avaliações:</h3>
+          <ul>
+            <% product.reviews.each do |review| %>
+              <li>
+                <strong>Average ratings:</strong><%= product.average_rating %> 
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p class="notice">Ainda não há avaliações para este produto.</p>
+        <% end %>
+      </div>
     </div>
   <% end %>
 </div>

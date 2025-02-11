@@ -1,20 +1,65 @@
-<p><%= link_to 'Back', products_path %></p>
+<nav>
+  <a href="<%= products_path %>">← Back</a>
+</nav>
 
-<section class="product">
-  <%= image_tag @product.featured_image if @product.featured_image.attached? %>
+<main>
+  <section class="product">
+    <% if @product.featured_image.attached? %>
+      <div class="product-image">
+        <%= image_tag @product.featured_image%>
+      </div>
+    <% end %>
 
-  <section class="product_info">
-    <% cache @product do %>
+    <div class="product-info">
       <h1><%= @product.name %></h1>
       <h3><%= @product.description %></h3>
-    <% end %>
-    
-    <%= render "inventory", product: @product %>
-    
-    <%= link_to "Back", products_path %>
-    <% if authenticated? %>
-      <%= link_to "Edit", edit_product_path(@product)%>
-      <%= button_to 'Delete', @product, method: :delete, data: { turbo_confirm: "Are you sure?"} %>
-    <% end %>
+
+      <%= render "inventory", product: @product %>
+
+      <hr>
+
+      <!-- Seção de Avaliações -->
+      <h2>Reviews</h2>
+
+      <% if authenticated? %>
+        <form action="<%= product_reviews_path(@product) %>" method="post">
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+          <label for="rating">Nota (1 a 5):</label>
+          <input type="number" name="review[rating]" min="1" max="5" required>
+
+          <label for="comment">Comment:</label>
+          <textarea name="review[comment]" rows="3" required></textarea>
+
+          <button type="submit" class="button">Submit Review</button>
+        </form>
+      <% else %>
+        <p class="notice">Log in to rate this product.</p>
+      <% end %>
+
+      <!-- Lista de Avaliações -->
+      <ul>
+        <% if @product.reviews.any? %>
+          <% @product.reviews.each do |review| %>
+            <li>
+              <strong><%= review.user.email_address %>:</strong>
+              <%= review.comment %> (Point: <%= review.rating %>)
+            </li>
+          <% end %>
+        <% else %>
+          <p class="notice">Ainda não há avaliações para este produto.</p>
+        <% end %>
+      </ul>
+
+      <hr>
+
+      <!-- Ações do Produto -->
+      <% if authenticated? %>
+        <p>
+          <%= link_to "Editar", edit_product_path(@product), class: "button" %>
+          <%= button_to "Deletar", @product, method: :delete, class: "button", data: { confirm: "Are you sure?" } %>
+        </p>
+      <% end %>
+    </div>
   </section>
-</section>
+</main>
